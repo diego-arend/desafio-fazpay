@@ -11,29 +11,42 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterTypeRequest } from "../../../types/requests/registerTypeRequest";
 import { RegisterSchemaRequest } from "../../../schemas/pages/public/registerSchemaRequest";
+import { useState } from "react";
+import { ROUTES } from "../../../constants/routes/routes";
+import { useNavigate } from "react-router-dom";
+import RegisterRequest from "../../../api/requests/registerRequest";
 
 export default function RegisterPage() {
-  //   const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<boolean>(false);
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
+    setError,
     formState: { errors },
   } = useForm<RegisterTypeRequest>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
     resolver: zodResolver(RegisterSchemaRequest),
   });
-
   const onSubmit: SubmitHandler<RegisterTypeRequest> = (data) => {
-    console.log("debug onSubmit Register", {
+    RegisterRequest({
       email: data.email,
       password: data.password,
       name: data.name,
       lastName: data.lastName,
       document: data.document,
-    });
+    })
+      .then(() => {
+        setSuccessMessage(true);
+        setTimeout(() => {
+          navigate(ROUTES.LOGIN);
+        }, 3000);
+      })
+      .catch(() => {
+        setError("email", {
+          type: "manual",
+          message: "Email já cadastrado!",
+        });
+      });
   };
 
   return (
@@ -52,6 +65,18 @@ export default function RegisterPage() {
         <Typography component="h1" variant="h5">
           Acessar
         </Typography>
+        {successMessage && (
+          <Typography
+            component="p"
+            variant="subtitle1"
+            sx={{
+              color: "success.main",
+              textAlign: "center",
+            }}
+          >
+            Registro efetuado!
+          </Typography>
+        )}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -60,7 +85,6 @@ export default function RegisterPage() {
         >
           <TextField
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email"
@@ -72,19 +96,17 @@ export default function RegisterPage() {
           />
           <TextField
             margin="normal"
-            required
             fullWidth
             label="Senha"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="password"
             error={!!errors.password}
             helperText={errors.password?.message}
             {...register("password")}
           />
           <TextField
             margin="normal"
-            required
             fullWidth
             label="Nome"
             id="name"
@@ -94,7 +116,6 @@ export default function RegisterPage() {
           />
           <TextField
             margin="normal"
-            required
             fullWidth
             label="Sobrenome"
             id="lastName"
@@ -104,7 +125,6 @@ export default function RegisterPage() {
           />
           <TextField
             margin="normal"
-            required
             fullWidth
             label="Documento"
             id="document"

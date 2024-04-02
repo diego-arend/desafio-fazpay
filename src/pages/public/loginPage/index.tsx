@@ -9,15 +9,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginRequestType } from "../../../types/requests/loginTypeRequests";
+import { LoginTypeRequest } from "../../../types/requests/loginTypeRequests";
 import { LoginSchemaRequest } from "../../../schemas/pages/public/loginSchemaRequest";
+import useAuth from "../../../context/auth/useAuth";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const [loginError, setLoginError] = useState<boolean>(false);
+  const { login } = useAuth();
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<LoginRequestType>({
+  } = useForm<LoginTypeRequest>({
     defaultValues: {
       email: "",
       password: "",
@@ -25,11 +29,15 @@ export default function LoginPage() {
     resolver: zodResolver(LoginSchemaRequest),
   });
 
-  const onSubmit: SubmitHandler<LoginRequestType> = (data) => {
-    console.log("debug onSubmit Login", {
-      email: data.email,
-      password: data.password,
-    });
+  const onSubmit: SubmitHandler<LoginTypeRequest> = (data) => {
+    setLoginError(false);
+    login(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      () => setLoginError(true)
+    );
   };
 
   return (
@@ -48,6 +56,18 @@ export default function LoginPage() {
         <Typography component="h1" variant="h5">
           Acessar
         </Typography>
+        {loginError && (
+          <Typography
+            component="p"
+            variant="subtitle1"
+            sx={{
+              color: "error.main",
+              textAlign: "center",
+            }}
+          >
+            Email ou Senha inválidos!
+          </Typography>
+        )}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -55,25 +75,26 @@ export default function LoginPage() {
           sx={{ mt: 1 }}
         >
           <TextField
+            aria-describedby="email-field"
+            inputProps={{ "data-testid": "login-email" }}
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email"
             autoComplete="email"
-            autoFocus
             error={!!errors.email}
             helperText={errors.email?.message}
             {...register("email")}
           />
           <TextField
+            aria-describedby="password-field"
+            inputProps={{ "data-testid": "login-password" }}
             margin="normal"
-            required
             fullWidth
             label="Senha"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="password"
             error={!!errors.password}
             helperText={errors.password?.message}
             {...register("password")}
