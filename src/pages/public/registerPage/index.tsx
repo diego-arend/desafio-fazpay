@@ -122,7 +122,7 @@ export default function RegisterPage() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link href="/" variant="body2">
                 {"Voltar para págino de acesso."}
               </Link>
             </Grid>

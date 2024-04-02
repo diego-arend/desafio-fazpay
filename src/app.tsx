@@ -1,7 +1,8 @@
 import { ThemeProvider } from "@emotion/react";
-import LoginPage from "./pages/public/loginPage";
 import { CssBaseline, createTheme } from "@mui/material";
-// import RegisterPage from "./pages/public/registerPage";
+import { BrowserRouter } from "react-router-dom";
+import BrowserRouterViews from "./routes";
+
 
 function App() {
   const defaultTheme = createTheme();
@@ -9,8 +10,9 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <LoginPage />
-      {/* <RegisterPage /> */}
+      <BrowserRouter>
+        <BrowserRouterViews />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
