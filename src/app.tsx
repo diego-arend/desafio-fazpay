@@ -2,7 +2,7 @@ import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, createTheme } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import BrowserRouterViews from "./routes";
-
+import Providers from "./context/provider";
 
 function App() {
   const defaultTheme = createTheme();
@@ -10,9 +10,11 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <BrowserRouter>
-        <BrowserRouterViews />
-      </BrowserRouter>
+      <Providers>
+        <BrowserRouter>
+          <BrowserRouterViews />
+        </BrowserRouter>
+      </Providers>
     </ThemeProvider>
   );
 }

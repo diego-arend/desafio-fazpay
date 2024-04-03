@@ -1,8 +1,9 @@
 import { PropsWithChildren, useCallback, useState } from "react";
-import { LoginTypeRequest } from "../../types/requests/loginTypeRequests";
-import configsConstant from "../../constants/configs/configsConstant";
-import { AuthContextType } from "../../types/context/authTypeContext";
-import LoginRequest from "../../api/requests/loginRequest";
+import { AuthContextType } from "../../types/context/authTypeContext.ts";
+import configsConstant from "../../constants/configs/configsConstant.ts";
+import LoginRequest from "../../api/requests/loginRequest.ts";
+import { LoginTypeRequest } from "../../types/requests/loginTypeRequests.ts";
+import { authContext } from "../auth/authContext.ts";
 
 export default function AuthProvider({ children }: PropsWithChildren) {
   const [auth, setAuth] = useState<AuthContextType["auth"]>({
@@ -12,8 +13,10 @@ export default function AuthProvider({ children }: PropsWithChildren) {
 
   const login = useCallback(
     (data: LoginTypeRequest, errorAction: () => void) => {
+      console.log("debug login", data);
       LoginRequest(data)
         .then((response) => {
+          console.log("debug response provider login", response);
           setAuth({
             isAuth: true,
             user: response.data.user,
@@ -44,6 +47,5 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     login,
     logout,
   } as AuthContextType;
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
