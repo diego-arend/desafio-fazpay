@@ -3,6 +3,7 @@ import { CssBaseline, createTheme } from "@mui/material";
 import { render } from "@testing-library/react";
 import { ReactNode } from "react";
 import { BrowserRouter } from "react-router-dom";
+import Providers from "../context/auth";
 
 // Provider de test que retorna todos os Providers gerais da aplicação, incluindo a memorização de rotas através do "wrapper: BrowserRouter"
 const GeneralRenderContexts = (children: ReactNode, { route = "/" } = {}) => {
@@ -12,7 +13,7 @@ const GeneralRenderContexts = (children: ReactNode, { route = "/" } = {}) => {
   const ui = (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      {children}
+      <Providers>{children}</Providers>
     </ThemeProvider>
   );
 
