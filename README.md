@@ -21,7 +21,7 @@ Por padrão os testes estão localizados na pasta src/test
 
 Irá mostrar no terminal uma tabela com a cobertura de linhas e funções dos arquivos do projeto.
 
-## Leia mais sobre as depências utilizadas
+## Leia mais sobre as dependências utilizadas
 
 React router: https://reactrouter.com/web/guides/quick-start
 
