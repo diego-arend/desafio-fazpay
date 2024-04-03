@@ -7,7 +7,6 @@ import { RegisterTypeRequest } from "../../types/requests/registerTypeRequest.ts
 import configsConstant from "../../constants/configs/configsConstant.ts";
 
 mock.onPost(endpoints.login).reply((request) => {
-  console.log("fake login");
   const data = JSON.parse(request.data) as LoginTypeRequest;
   const allStorageUsers = localStorage.getItem(configsConstant.allUsers);
   const users = allStorageUsers ? JSON.parse(allStorageUsers) : [];

@@ -17,16 +17,17 @@ import { ROUTES } from "../../../../constants/routes/routes";
 export default function ListProducts() {
   const [dataProducts, setDataProducts] =
     useState<ListProductsTypeResponse | null>(null);
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    ListProductsRequest().then((res) => {
-      setDataProducts(res.data);
-    });
+    ListProductsRequest()
+      .then((res) => {
+        console.log("debug login response", res);
+        setDataProducts(res.data);
+      })
+      .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log("debug list", dataProducts);
 
   return (
     <Container component="main" maxWidth="lg">
@@ -46,20 +47,31 @@ export default function ListProducts() {
                     margin: 2,
                   }}
                   secondaryAction={
-                    <Button
-                    aria-label="edit-prodct"
-                    onClick={
-                      () => navigate(ROUTES.EDIT_PRODUCT.replace(':id', String(product.id)))
-                    }
-                    >
-                      <EditIcon />
-                    </Button>
+                    <div data-testid={`edit-product-button-${product.id}`}>
+                      <Button
+                        aria-label="edit-prodct"
+                        onClick={() =>
+                          navigate(
+                            ROUTES.EDIT_PRODUCT.replace(
+                              ":id",
+                              String(product.id)
+                            )
+                          )
+                        }
+                      >
+                        <EditIcon />
+                      </Button>
+                    </div>
                   }
                 >
                   <ListItemText
                     primary={
-                      <>
+                      <div data-testid={`id-product-name-${product.name}`}>
                         <Typography>{product.name}</Typography>
+                      </div>
+                    }
+                    secondary={
+                      <div data-testid={`id-product-price-${product.id}`}>
                         <Typography>
                           Valor:{" "}
                           {Intl.NumberFormat("pt-BR", {
@@ -67,7 +79,7 @@ export default function ListProducts() {
                             currency: "BRL",
                           }).format(product.price / 100)}
                         </Typography>
-                      </>
+                      </div>
                     }
                   />
                 </ListItem>

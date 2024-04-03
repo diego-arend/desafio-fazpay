@@ -30,7 +30,7 @@ export default function EditProducts() {
       ...(data as unknown as ProductEntity),
       price: Number(data.price.replace(/\D/g, "")),
     };
-    console.log("debug edit", editedProduct);
+
     EditProductByIdRequest(editedProduct).then(() => {
       window.location.reload();
     });

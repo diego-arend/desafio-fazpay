@@ -16,10 +16,8 @@ export default function AuthProvider({ children }: PropsWithChildren) {
 
   const login = useCallback(
     (data: LoginTypeRequest, errorAction: () => void) => {
-      console.log("debug login", data);
       LoginRequest(data)
         .then((response) => {
-          console.log("debug response provider login", response);
           setAuth({
             isAuth: true,
             user: response.data.user,
@@ -35,9 +33,9 @@ export default function AuthProvider({ children }: PropsWithChildren) {
           }, 200);
         })
         .catch(errorAction);
-        setTimeout(() => {
-          navigate(ROUTES.LOGIN);
-        }, 200);
+      setTimeout(() => {
+        navigate(ROUTES.LOGIN);
+      }, 200);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -53,7 +51,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     setTimeout(() => {
       navigate(ROUTES.LOGIN);
     }, 200);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = {

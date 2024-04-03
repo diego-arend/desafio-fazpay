@@ -6,7 +6,6 @@ import configsConstant from "../../constants/configs/configsConstant.ts";
 
 const uri = new RegExp(endpoints.product_list_ById.replace(":id", ".*"));
 mock.onGet(uri).reply((request) => {
-  console.log("[GET]", request);
   const id = request.url?.split("/").pop();
 
   const storageProducts: ListProductsTypeResponse | null = JSON.parse(

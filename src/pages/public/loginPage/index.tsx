@@ -30,7 +30,6 @@ export default function LoginPage() {
   });
 
   const onSubmit: SubmitHandler<LoginTypeRequest> = (data) => {
-    console.log("debug login page login", data);
     setLoginError(false);
     login(
       {

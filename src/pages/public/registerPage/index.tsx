@@ -1,10 +1,8 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -59,11 +57,8 @@ export default function RegisterPage() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5">
-          Acessar
+          Registrar
         </Typography>
         {successMessage && (
           <Typography
@@ -89,7 +84,6 @@ export default function RegisterPage() {
             id="email"
             label="Email"
             autoComplete="email"
-            autoFocus
             error={!!errors.email}
             helperText={errors.email?.message}
             {...register("email")}
@@ -108,7 +102,7 @@ export default function RegisterPage() {
           <TextField
             margin="normal"
             fullWidth
-            label="Nome"
+            label="Primeiro Nome"
             id="name"
             error={!!errors.name}
             helperText={errors.name?.message}
