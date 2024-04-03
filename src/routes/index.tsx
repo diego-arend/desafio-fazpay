@@ -16,6 +16,7 @@ const NotFound = lazy(() => import("../pages/public/notFound"));
 const Login = lazy(() => import("../pages/public/loginPage"));
 const Register = lazy(() => import("../pages/public/registerPage"));
 const List = lazy(() => import("../pages/private/app/list"));
+const Edit = lazy(() => import("../pages/private/app/edit"));
 
 export default function RouterAcl() {
   const navigate = useNavigate();
@@ -44,6 +45,14 @@ export default function RouterAcl() {
             element={
               <Suspense fallback={<>Carregando...</>}>
                 <List />
+              </Suspense>
+            }
+          />
+          <Route
+            path={ROUTES.EDIT_PRODUCT}
+            element={
+              <Suspense fallback={<>Carregando...</>}>
+                <Edit />
               </Suspense>
             }
           />
