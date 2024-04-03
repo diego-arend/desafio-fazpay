@@ -12,7 +12,10 @@ dist
 dist-ssr
 *.local
 package-lock.json
-coverage/*
+/reports/*
+/coverage
+/coverage/*
+
 
 # Editor directories and files
 .vscode/*
