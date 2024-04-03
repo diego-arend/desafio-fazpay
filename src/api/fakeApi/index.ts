@@ -1,9 +1,9 @@
 import { mock } from "./mockApi.ts";
 
-import './login'
-import './register'
-import './productList'
-// import './auth/product'
-// import './auth/edit-product.ts'
+import "./login";
+import "./register";
+import "./productList";
+import "./productById";
+import "./editProductById"
 
-mock.onAny().passThrough()
+mock.onAny().passThrough();
