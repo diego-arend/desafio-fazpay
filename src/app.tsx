@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, createTheme } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
-import BrowserRouterViews from "./routes";
-import Providers from "./context/provider";
+import RouterAcl from "./routes";
+import Providers from "./context/auth";
 
 function App() {
   const defaultTheme = createTheme();
@@ -10,11 +10,11 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Providers>
-        <BrowserRouter>
-          <BrowserRouterViews />
-        </BrowserRouter>
-      </Providers>
+      <BrowserRouter>
+        <Providers>
+          <RouterAcl />
+        </Providers>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

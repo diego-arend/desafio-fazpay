@@ -1,5 +1,7 @@
 // Names of routes
 export const ROUTES = {
   LOGIN: "/",
-  REGISTER: "/register"
+  REGISTER: "/register",
+  LIST: "/list",
+  EDIT: "/edit"
 };
