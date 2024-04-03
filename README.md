@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+## Projeto do desafio FazPay frontend.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Criado utilizando scafold Vite React Typescript
 
-Currently, two official plugins are available:
+(https://vitest.dev/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Comandos para rodar o projeto
 
-## Expanding the ESLint configuration
+Executar em modo desenvolvedor local:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### `npm run dev`
 
-- Configure the top-level `parserOptions` property like this:
+(http://localhost:5173) para ver no navegador.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### `npm run test`
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Irá efetuar os testes localizados no projeto.
+Por padrão os testes estão localizados na pasta src/test
+
+### `npm run testCoverage`
+
+Irá mostrar no terminal uma tabela com a cobertura de linhas e funções dos arquivos do projeto.
+
+## Read more about the main dependencies used in this project
+
+React router: https://reactrouter.com/web/guides/quick-start
+
+Jest: https://jestjs.io/
+
+Testing library: https://testing-library.com
+
+Material Ui: https://mui.com
