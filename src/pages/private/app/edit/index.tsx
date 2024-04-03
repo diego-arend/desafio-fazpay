@@ -30,28 +30,32 @@ export default function EditProducts() {
       ...(data as unknown as ProductEntity),
       price: Number(data.price.replace(/\D/g, "")),
     };
-
+    
+    console.log("debug teste", editedProduct);
     EditProductByIdRequest(editedProduct).then(() => {
       window.location.reload();
     });
   };
 
   useEffect(() => {
-    GetProductByIdRequest(id!).then((response) => {
-      const product = response.data;
-      setDataProduct({
-        ...product,
-        price: formatBRLCurrency(product.price),
-      });
+    GetProductByIdRequest(id!)
+      .then((response) => {
+        console.log("debug edit", response.data);
+        const product = response.data;
+        setDataProduct({
+          ...product,
+          price: formatBRLCurrency(product.price),
+        });
 
-      Object.entries(product).forEach(([key, value]) => {
-        if (key === "price") {
-          setValue(key, formatBRLCurrency(value as number));
-        } else {
-          setValue(key as "name", value as string);
-        }
-      });
-    });
+        Object.entries(product).forEach(([key, value]) => {
+          if (key === "price") {
+            setValue(key, formatBRLCurrency(value as number));
+          } else {
+            setValue(key as "name", value as string);
+          }
+        });
+      })
+      .catch(() => {});
   }, [id, setValue]);
 
   return (
@@ -67,18 +71,6 @@ export default function EditProducts() {
         <Typography component="h1" variant="h5">
           Editar Produto
         </Typography>
-        {/* {successMessage && (
-          <Typography
-            component="p"
-            variant="subtitle1"
-            sx={{
-              color: "success.main",
-              textAlign: "center",
-            }}
-          >
-            Registro efetuado!
-          </Typography>
-        )} */}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
